@@ -25,10 +25,17 @@ body {
 
 .item {
   display: flex;
+  align-items: center;
 }
 
 .item div {
   display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+.item div > img {
+  justify-content: end;
 }
 
 .item p {
@@ -38,6 +45,7 @@ body {
 
 .card__title {
   display: flex;
+  align-items: center;
 }
 
 .card__title h3 {
