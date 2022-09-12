@@ -1,6 +1,4 @@
 import './css/styles.css';
-import Notiflix from 'notiflix';
-import _debounce from 'debounce';
 import _, { debounce } from 'lodash';
 const DEBOUNCE_DELAY = 300;
 import { getCountries } from './js/restCountriesAPI';
@@ -22,17 +20,29 @@ function createCountryCard(response) {
 
   if (response.length > 2) {
     list.innerHTML = '';
-    for (let key of response) {
-      list.insertAdjacentHTML(
-        'beforeend',
-        `<li class="item">
-        <div><img class="item__img" src='${key.flags.svg}' width = 70 height = 40/>
+
+    const severalCards = response
+      .map(key => {
+        return `<li class="item">
+         <div><img class="item__img" src='${key.flags.svg}' width = 70 height = 40/>
         <p class="item__name">${key.name}</p></div>
-        
-       
-       </li>`
-      );
-    }
+
+        </li>`;
+      })
+      .join('');
+
+    list.insertAdjacentHTML('beforeend', severalCards);
+
+    // for (let key of response) {
+    //   list.insertAdjacentHTML(
+    //     'beforeend',
+    //     `<li class="item">
+    //     <div><img class="item__img" src='${key.flags.svg}' width = 70 height = 40/>
+    //     <p class="item__name">${key.name}</p></div>
+
+    //    </li>`
+    //   );
+    // }
   } else {
     const { flags, name, population, languages, capital } = response[0];
     list.innerHTML = '';
@@ -50,7 +60,6 @@ function createCountryCard(response) {
       })
       .join(', ')}
 
-      </p></div>;
-    `;
+      </p></div>`;
   }
 }
